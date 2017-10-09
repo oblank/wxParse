@@ -1,7 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/lab/lab"
+    "pages/lab/lab",
+    "pages/wemark/lab"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -19,7 +20,12 @@
       "iconPath": "image/icon_API.png",
       "selectedIconPath": "image/icon_API_HL.png",
       "text": "Demo"
-    }, {
+    },{
+      "pagePath": "pages/wemark/lab",
+      "iconPath": "image/icon_API.png",
+      "selectedIconPath": "image/icon_API_HL.png",
+      "text": "wemark"
+    },{
       "pagePath": "pages/lab/lab",
       "iconPath": "image/icon_API.png",
       "selectedIconPath": "image/icon_API_HL.png",

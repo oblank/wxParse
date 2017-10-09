@@ -1,0 +1,4 @@
+
+<!--pages/lab/lab.wxml-->
+<import src="../../wemark/wemark.wxml"/>
+<template is="wemark" data="{{...wemark}}"></template>
