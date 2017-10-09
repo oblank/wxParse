@@ -1,8 +1,10 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/indexmd/index",
     "pages/lab/lab",
-    "pages/wemark/lab"
+    "pages/wemark/lab",
+    "pages/editor/editor"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -16,15 +18,26 @@
     "borderStyle": "white",
     "backgroundColor": "#ffffff",
     "list": [{
-      "pagePath": "pages/index/index",
-      "iconPath": "image/icon_API.png",
-      "selectedIconPath": "image/icon_API_HL.png",
-      "text": "Demo"
-    },{
+        "pagePath": "pages/index/index",
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "text": "Demo"
+      },{
+        "pagePath": "pages/indexmd/index",
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "text": "DemoMD"
+      },{
       "pagePath": "pages/wemark/lab",
       "iconPath": "image/icon_API.png",
       "selectedIconPath": "image/icon_API_HL.png",
       "text": "wemark"
+    },
+    {
+      "pagePath": "pages/editor/editor",
+      "iconPath": "image/icon_API.png",
+      "selectedIconPath": "image/icon_API_HL.png",
+      "text": "editor"
     },{
       "pagePath": "pages/lab/lab",
       "iconPath": "image/icon_API.png",
