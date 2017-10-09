@@ -6,7 +6,9 @@ Page({
     topTipMsg: '',
     form: {},
     blocks: [
-      { 'index': 0, 'value': 'xxxx' }
+      { 'index': 0, 'value': '' }
+      // { 'index': 0, type: 'text', 'value': '' },
+      // { 'index': 0, type: 'image', 'value': 'http://mat1.gtimg.com/xian/dcls2017/icon-image.png' }
     ]
   },
   onShow: function () {
