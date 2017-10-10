@@ -1,10 +1,10 @@
 {
   "pages":[
+    "pages/editor/editor",    
     "pages/index/index",
     "pages/indexmd/index",
     "pages/lab/lab",
-    "pages/wemark/lab",
-    "pages/editor/editor"
+    "pages/wemark/lab"
   ],
   "window":{
     "backgroundTextStyle":"light",

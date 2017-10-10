@@ -49,6 +49,7 @@ Page({
 
 	<div style="margin-top:10px;">
 		<h3 style="color: #000;">支持的标签</h3>
+    <a href="http://baidu.com">http://baidu.com</a>
 		<blockquote>wxParse支持70%的html的标签</blockquote>
 		<div style="margin-top:10px;">
 			<span>span标签</span>
