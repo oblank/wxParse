@@ -20,7 +20,23 @@ Page({
         }
       }]
     ],
-    node_active: 0
+    node_active: 0,
+    editorHeight: 300
+  },
+
+  onLoad() {
+    console.log('onload')
+    let that = this
+
+    // 计算侧边导航高度
+    wx.getSystemInfo({
+      success: function (res) {
+        let editorHeight = res.windowHeight - 60 // search bar is 44px， tabbar is 50px
+        that.editorHeight = editorHeight
+        that.setData({ editorHeight: editorHeight })
+        console.log('editorHeight', editorHeight)
+      }
+    })
   },
 
   bindTextAreaBlur: function (e) {
