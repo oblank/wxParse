@@ -2,30 +2,25 @@
 Page({
 
   data: {
-    showTopTips: false,
-    topTipMsg: '',
-    form: {},
-    blocks: [
-      { 'index': 0, 'value': '' }
-      // { 'index': 0, type: 'text', 'value': '' },
-      // { 'index': 0, type: 'image', 'value': 'http://mat1.gtimg.com/xian/dcls2017/icon-image.png'
-      //}
-    ],
-    nodes: [],
-    showControlIndex: "",
-    
-    nodes3: [{
-      name: 'img',
-      attrs: {
-        src: "http://mat1.gtimg.com/xian/dcls2017/icon-down.png",
-        class: 'url',
-        style: 'display:block; margin-top:10px; color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-      },
-      children: [{
-        type: 'text',
-        text: `del:这是删除线`,
+    nodes: [
+      [{
+        name: 'p',
+        attrs: {
+          class: 'p',
+        },
+        children: [{
+          type: 'text',
+          text: '请输入文本内容',
+        }]
+      }],
+      [{
+        name: 'img',
+        attrs: {
+          src: 'http://mat1.gtimg.com/xian/dcls2017/icon-down.png',
+        }
       }]
-    }]
+    ],
+    node_acitve: 0
   },
 
   bindTextAreaBlur: function (e) {
@@ -51,7 +46,7 @@ Page({
           },
           children: [{
             type: 'text',
-            text: '点击输入标题',
+            text: '请输入标题',
           }]
         }])
         break;
@@ -66,7 +61,7 @@ Page({
           },
           children: [{
             type: 'text',
-            text: '点击输入文本内容',
+            text: '请输入文本内容',
           }]
         }])
         break;
@@ -81,8 +76,20 @@ Page({
           },
           children: [{
             type: 'text',
-            text: '点击输入引用内容',
+            text: '请输入引用内容',
           }]
+        }])
+        break;
+      }
+
+      // image
+      case 'IMG': {
+        nodes.push([{
+          name: tag.toLowerCase(),
+          attrs: {
+            src: "http://mat1.gtimg.com/xian/dcls2017/icon-down.png",
+            class: tag.toLowerCase()
+          }
         }])
         break;
       }
@@ -92,9 +99,10 @@ Page({
       };
 
     console.log(nodes);
-      that.setData({
-        nodes: nodes
-      })
+    that.setData({
+      nodes: nodes,
+      node_acitve: nodes.length - 1
+    })
   },
 
   tap(event) {
@@ -121,40 +129,39 @@ Page({
     let index = event.target.dataset.index;
     let nodes = that.data.nodes
     console.log('nodes,', index, nodes)
+    let data = {};
     if (value) {
       if (nodes[index]) {
         if (nodes[index][0].children[0].type == 'text') {
           nodes[index][0].children[0].text = value;
         }
       }
-      that.setData({
-        nodes: nodes
-      })
+      data.nodes = nodes
     }
+
+    data.node_acitve = index
+
+    console.log('textareaInput', data);
+    that.setData(data)
   },
 
   // textarea 失去焦点时赋值给rich-text
   textareaBlur(event) {
     console.log('textareaBlur:', event)
     let that = this;
-    let value = event.detail.value;
-    let index = event.target.dataset.index;
-    let nodes = that.data.nodes
-    console.log('nodes,', index, nodes)
-
-    if (value) {
-      if (nodes[index]) {
-        if (nodes[index][0].children[0].type == 'text') {
-          nodes[index][0].children[0].text = value;
-        }
-      }
-      that.setData({
-        nodes: nodes
-      })
-    }
-    
+    // that.setData({
+    //   node_active: -1
+    // })
   },
 
+  // textarea 失去焦点时赋值给rich-text
+  inputFocus(event) {
+    console.log('inputFocus:', event)
+    let that = this;
+    that.setData({
+      node_active: event.target.dataset.index
+    })
+  },
 
 
 

@@ -10,18 +10,25 @@
   <block wx:for="{{nodes}}" wx:key="{{o}}">
   
     <block wx:if="{{ item.length }}">
-        <!-- <rich-text nodes="{{item}}" richtext="node-{{index}}" data-index="{{index}}"  style="border: 1px solid blue;" bindtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text> -->
-        <view wx:if="{{item[0].name == 'blockquote'}}"> 
-          <textarea id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindblur="textareaBlur" bindinput="textareaInput"></textarea>
+      
+        <view class='node' wx:if="{{item[0].name == 'h1' || item[0].name == 'h2' || item[0].name == 'h3' || item[0].name == 'h4' || item[0].name == 'h5'}}">
+          <view wx-if="{{node_acitve == index}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
+          <input id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput"></input>
+          <view wx-if="{{node_acitve == index}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
         </view>
-        <view wx:elif="{{item[0].name == 'h1' || item[0].name == 'h2' || item[0].name == 'h3' || item[0].name == 'h4' || item[0].name == 'h5'}}">
-          <input id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindblur="textareaBlur" bindinput="textareaInput"></input>
+
+
+        <view class='node' wx:elif="{{item[0].name == 'img'}}">
+            <view wx-if="{{node_acitve == index}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
+            <image src="http://mat1.gtimg.com/xian/dcls2017/icon-text.png" />
+            <view wx-if="{{node_acitve == index}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
         </view>
-        <view wx:elif="{{item[0].name == 'img'}}">
-          TODO 图片上传控件
-        </view>
-        <view wx:else>
-          <textarea id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindblur="textareaBlur" bindinput="textareaInput"></textarea>
+
+
+        <view class='node' wx:else>
+          <view wx-if="{{node_acitve == index}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
+          <textarea id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" maxlength="-1"></textarea>
+          <view wx-if="{{node_acitve == index}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
         </view>
 
         
@@ -39,7 +46,7 @@
   <view id='H4' catchtap='tapIcon' style='font-size: 12px'>标题</view>
   <view id='P' catchtap='tapIcon' >文本</view>
   <view id='IMG' catchtap='tapIcon' >图片</view>
-  <view id='BLOCKQUOTE' catchtap='tapIcon' >“引”</view>
+  <view id='BLOCKQUOTE' catchtap='tapIcon' >“引用”</view>
   <!-- <view id='STRONG' catchtap='tapIcon' style='font-weight: 600'>加粗</view> -->
   <view id='CODE' catchtap='tapIcon'>源码</view>
 </view>

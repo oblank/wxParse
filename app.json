@@ -4,7 +4,7 @@
     "pages/index/index",
     "pages/indexmd/index",
     "pages/lab/lab",
-    "pages/wemark/lab"
+    "pages/editor_old/editor"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -39,7 +39,7 @@
       "selectedIconPath": "image/icon_API_HL.png",
       "text": "editor"
     },{
-      "pagePath": "pages/lab/lab",
+      "pagePath": "pages/editor_old/editor",
       "iconPath": "image/icon_API.png",
       "selectedIconPath": "image/icon_API_HL.png",
       "text": "实验室"
