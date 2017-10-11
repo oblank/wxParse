@@ -5,7 +5,7 @@
       
         <view class='node' wx:if="{{item[0].name == 'h1' || item[0].name == 'h2' || item[0].name == 'h3' || item[0].name == 'h4' || item[0].name == 'h5'}}">
           <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
-          <input id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput"></input>
+          <textarea id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput"></textarea>
           <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
         </view>
 

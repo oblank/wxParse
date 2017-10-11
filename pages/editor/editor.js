@@ -163,87 +163,43 @@ Page({
     })
   },
 
-
-
-
-
-
-
-
-
-
-
-
-
-  handPlus: function (e) {
-    // 绑定增加编辑窗    
-    let _order = e.target.dataset.order;
-    let _blocks = this.data.blocks;
-    // 依次+1
-    _blocks.map(function (n, i) {
-      if (n.index >= _order) {
-        _blocks[i].index += 1;
-      }
-    })
-    _blocks.push({ 'index': _order, 'value': '' });
-    _blocks.sort(function (a, b) { return a.index - b.index; })
-    this.setData({
-      'blocks': _blocks
-    })
-  },
-  bingContentInput: function (e) {
-    // 绑定输入事件
-    let _index = e.target.dataset.index;
-    let _blocks = this.data.blocks;
-
-    _blocks[_index].value = e.detail.value;
-    this.setData({
-      'blocks': _blocks
-    })
-  },
-  handTitleInput: function (e) {
-    this.setData({
-      'title': e.detail.value
-    })
-  },
-  bingTypeSelect: function (e) {
-    // 输入类型
-    let type = e.target.dataset.type;
-    let blocks = this.data.blocks;
-    let index = e.target.dataset.index;
-
-    if (type == "image") {
-      blocks[index].type = type;
-      this._handImageUpload(index);
-    } else {
-      this._handTextInput(index);
-    }
-  },
   handBlockUp: function (e) {
     let index = e.target.dataset.index;
-    let _blocks = this.data.blocks;
+    let nodes = this.data.nodes;
     // 依次+1
     if (index == 0) return;
 
-    _blocks[index - 1].index += 1;
-    _blocks[index].index -= 1;
-    _blocks.sort(function (a, b) { return a.index - b.index; })
+    let tmp = nodes[index];
+    nodes[index] = nodes[index - 1];
+    nodes[index - 1] = tmp;
     this.setData({
-      'blocks': _blocks
+      nodes: nodes,
+      node_active: index - 1
     })
   },
+
   handBlockDown: function (e) {
     let index = e.target.dataset.index;
-    let _blocks = this.data.blocks;
-    if (index == _blocks.length - 1) return;
+    let nodes = this.data.nodes;
+    // 依次+1
+    if (index == nodes.length) return;
 
-    _blocks[index + 1].index -= 1;
-    _blocks[index].index += 1;
-    _blocks.sort(function (a, b) { return a.index - b.index; })
+    console.log('nodes1,', nodes)
+    let tmp = nodes[index];
+    nodes[index] = nodes[index + 1];
+    nodes[index + 1] = tmp;
+    console.log('nodes2,', nodes)
+
     this.setData({
-      'blocks': _blocks
+      nodes: nodes,
+      node_active: index + 1
     })
   },
+
+
+
+
+
   handBlockClose: function (e) {
     let index = e.target.dataset.index;
     let _blocks = this.data.blocks;
@@ -267,20 +223,13 @@ Page({
       }
     });
   },
-  _handTextInput: function (index) {
-    let blocks = this.data.blocks;
+  
 
-    blocks[index].fadeOutLeft = this.fadeOutLeft
-    blocks[index].fadeOutRight = this.fadeOutRight
 
-    this.setData({ 'blocks': blocks })
-    setTimeout(function () {
-      blocks[index].type = "text";
-      this.setData({
-        'blocks': blocks
-      })
-    }.bind(this), 250)
-  },
+
+
+
+
   _handImageUpload: function (index) {
     let blocks = this.data.blocks;
     let self = this;
@@ -333,165 +282,3 @@ Page({
   },
 })
 
-
-// nodes_: [{
-//   name: 'div',
-//   attrs: {
-//     class: 'div_class',
-//     style: 'line-height: 60px; color: red;'
-//   },
-//   children: [{
-//     type: 'text',
-//     text: 'Hello&nbsp;World!',
-//   }]
-// },
-// {
-//   name: 'div',
-//   attrs: {
-//     class: 'div_class',
-//     style: 'line-height: 60px; color: blue;'
-//   },
-//   children: [{
-//     type: 'text',
-//     text: 'Hello&nbsp;World!',
-//   }]
-// },
-// {
-//   name: 'blockquote',
-//   attrs: {
-//     class: 'url',
-//     style: 'color: pink;background: #efefef; padding: 15px 5px; border-left:3px solid #CCC;'
-//   },
-//   children: [{
-//     type: 'text',
-//     text: 'baidu.com<a href="">baidu.com</a>',
-//   }]
-// }
-//   ,
-// {
-//   name: 'br',
-//   attrs: {
-//     class: 'url',
-//     style: ''
-//   }
-// }
-
-//   ,
-// {
-//   name: 'code',
-//   attrs: {
-//     class: 'url',
-//     style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-//   },
-//   children: [{
-//     type: 'text',
-//     text: `CODE:ss `
-//   }, {
-//     type: 'br',
-//     text: ''
-//   }, {
-//     type: 'text',
-//     text: ` 
-//            line-height: 60px; 
-//            color: pink;
-//            background: #efefef; 
-//            padding: 5px 5px; 
-//            border-left:3px solid #CCC`
-//   }]
-// }
-
-//   ,
-// {
-//   name: 'br',
-//   attrs: {
-//     class: 'url',
-//     style: ''
-//   }
-// }
-//   ,
-// {
-//   name: 'br',
-//   attrs: {
-//     class: 'url',
-//     style: ''
-//   }
-// }
-
-//   ,
-// {
-//   name: 'hr',
-//   attrs: {
-//     class: 'url',
-//     style: ''
-//   }
-// }
-
-//   ,
-// {
-//   name: 'br',
-//   attrs: {
-//     class: 'url',
-//     style: ''
-//   }
-// }
-//   ,
-// {
-//   name: 'br',
-//   attrs: {
-//     class: 'url',
-//     style: ''
-//   }
-// }
-
-//   ,
-// {
-//   name: 'i',
-//   attrs: {
-//     class: 'url',
-//     style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-//   },
-//   children: [{
-//     type: 'text',
-//     text: `i:这是斜体线`,
-//   }]
-// },
-
-// {
-//   name: 'strong',
-//   attrs: {
-//     class: 'url',
-//     style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-//   },
-//   children: [{
-//     type: 'text',
-//     text: `strong:这是斜体线`,
-//   }]
-// },
-
-// {
-//   name: 'del',
-//   attrs: {
-//     class: 'url',
-//     style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-//   },
-//   children: [{
-//     type: 'text',
-//     text: `del:这是删除线`,
-//   }]
-// }
-
-
-// ],
-
-//   nodes2: [{
-//     name: 'img',
-//     attrs: {
-//       src: "http://mat1.gtimg.com/xian/dcls2017/icon-down.png",
-//       class: 'url',
-//       style: 'display:block; margin-top:10px; color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-//     },
-//     children: [{
-//       type: 'text',
-//       text: `del:这是删除线`,
-//     }]
-//   }],
