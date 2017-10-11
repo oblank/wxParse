@@ -8,170 +8,12 @@ Page({
     blocks: [
       { 'index': 0, 'value': '' }
       // { 'index': 0, type: 'text', 'value': '' },
-      // { 'index': 0, type: 'image', 'value': 'http://mat1.gtimg.com/xian/dcls2017/icon-image.png' }
+      // { 'index': 0, type: 'image', 'value': 'http://mat1.gtimg.com/xian/dcls2017/icon-image.png'
+      //}
     ],
-    nodes: [{
-      name: 'div',
-      attrs: {
-        class: 'div_class',
-        style: 'line-height: 60px; color: red;'
-      },
-      children: [{
-        type: 'text',
-        text: 'Hello&nbsp;World!',
-      }]
-    },
-      {
-        name: 'div',
-        attrs: {
-          class: 'div_class',
-          style: 'line-height: 60px; color: blue;'
-        },
-        children: [{
-          type: 'text',
-          text: 'Hello&nbsp;World!',
-        }]
-      },
-      {
-        name: 'blockquote',
-        attrs: {
-          class: 'url',
-          style: 'color: pink;background: #efefef; padding: 15px 5px; border-left:3px solid #CCC;'
-        },
-        children: [{
-          type: 'text',
-          text: 'baidu.com<a href="">baidu.com</a>',
-        }]
-      }
-      ,
-      {
-        name: 'br',
-        attrs: {
-          class: 'url',
-          style: ''
-        }
-      }
-
-      ,
-      {
-        name: 'code',
-        attrs: {
-          class: 'url',
-          style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-        },
-        children: [{
-          type: 'text',
-          text: `CODE:ss `
-        },{
-          type: 'br',
-          text:''
-        }, {
-          type: 'text',
-          text: ` 
-           line-height: 60px; 
-           color: pink;
-           background: #efefef; 
-           padding: 5px 5px; 
-           border-left:3px solid #CCC`
-        }]
-      }
-
-      ,
-      {
-        name: 'br',
-        attrs: {
-          class: 'url',
-          style: ''
-        }
-      }
-      ,
-      {
-        name: 'br',
-        attrs: {
-          class: 'url',
-          style: ''
-        }
-      }
-
-      ,
-      {
-        name: 'hr',
-        attrs: {
-          class: 'url',
-          style: ''
-        }
-      }
-
-      ,
-      {
-        name: 'br',
-        attrs: {
-          class: 'url',
-          style: ''
-        }
-      }
-      ,
-      {
-        name: 'br',
-        attrs: {
-          class: 'url',
-          style: ''
-        }
-      }
-
-      , 
-      {
-        name: 'i',
-        attrs: {
-          class: 'url',
-          style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-        },
-        children: [{
-          type: 'text',
-          text: `i:这是斜体线`,
-        }]
-      },
-      
-      {
-        name: 'strong',
-        attrs: {
-          class: 'url',
-          style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-        },
-        children: [{
-          type: 'text',
-          text: `strong:这是斜体线`,
-        }]
-      },
-
-      {
-        name: 'del',
-        attrs: {
-          class: 'url',
-          style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-        },
-        children: [{
-          type: 'text',
-          text: `del:这是删除线`,
-        }]
-      }
-
-
-      ],
-
-    nodes2: [{
-      name: 'img',
-      attrs: {
-        src: "http://mat1.gtimg.com/xian/dcls2017/icon-down.png",
-        class: 'url',
-        style: 'display:block; margin-top:10px; color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
-      },
-      children: [{
-        type: 'text',
-        text: `del:这是删除线`,
-      }]
-    }],
-
+    nodes: [],
+    showControlIndex: "",
+    
     nodes3: [{
       name: 'img',
       attrs: {
@@ -190,6 +32,71 @@ Page({
     console.log(e.detail.value)
   },
 
+  // 编辑器
+  tapIcon(e) {
+    console.log('taped icon...', e)    
+    let that = this;
+    let tag = e.target.id || ''
+    let nodes = that.data.nodes
+    switch(tag) {
+      // title
+      case 'H2': 
+      case 'H3':
+      case 'H4':
+      case 'H5': {
+        nodes.push([{
+          name: tag.toLowerCase(),
+          attrs: {
+            class: tag.toLowerCase(),
+          },
+          children: [{
+            type: 'text',
+            text: '点击输入标题',
+          }]
+        }])
+        break;
+      }
+
+      // pargraph
+      case 'P': {
+        nodes.push([{
+          name: tag.toLowerCase(),
+          attrs: {
+            class: tag.toLowerCase(),
+          },
+          children: [{
+            type: 'text',
+            text: '点击输入文本内容',
+          }]
+        }])
+        break;
+      }
+
+      // pargraph
+      case 'BLOCKQUOTE': {
+        nodes.push([{
+          name: tag.toLowerCase(),
+          attrs: {
+            class: tag.toLowerCase(),
+          },
+          children: [{
+            type: 'text',
+            text: '点击输入引用内容',
+          }]
+        }])
+        break;
+      }
+
+      default:
+        console.log('no icon logic matched')
+      };
+
+    console.log(nodes);
+      that.setData({
+        nodes: nodes
+      })
+  },
+
   tap(event) {
     console.log('taped...', event)
   },
@@ -205,6 +112,64 @@ Page({
   touchend(event) {
     console.log('touchend...', event)
   },
+
+  // textarea 输入
+  textareaInput(event) {
+    console.log('textareaBlur:', event)
+    let that = this;
+    let value = event.detail.value;
+    let index = event.target.dataset.index;
+    let nodes = that.data.nodes
+    console.log('nodes,', index, nodes)
+    if (value) {
+      if (nodes[index]) {
+        if (nodes[index][0].children[0].type == 'text') {
+          nodes[index][0].children[0].text = value;
+        }
+      }
+      that.setData({
+        nodes: nodes
+      })
+    }
+  },
+
+  // textarea 失去焦点时赋值给rich-text
+  textareaBlur(event) {
+    console.log('textareaBlur:', event)
+    let that = this;
+    let value = event.detail.value;
+    let index = event.target.dataset.index;
+    let nodes = that.data.nodes
+    console.log('nodes,', index, nodes)
+
+    if (value) {
+      if (nodes[index]) {
+        if (nodes[index][0].children[0].type == 'text') {
+          nodes[index][0].children[0].text = value;
+        }
+      }
+      that.setData({
+        nodes: nodes
+      })
+    }
+    
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   onShow: function () {
     var fadeOutLeft = wx.createAnimation({
@@ -391,3 +356,166 @@ Page({
     console.log(form);
   },
 })
+
+
+// nodes_: [{
+//   name: 'div',
+//   attrs: {
+//     class: 'div_class',
+//     style: 'line-height: 60px; color: red;'
+//   },
+//   children: [{
+//     type: 'text',
+//     text: 'Hello&nbsp;World!',
+//   }]
+// },
+// {
+//   name: 'div',
+//   attrs: {
+//     class: 'div_class',
+//     style: 'line-height: 60px; color: blue;'
+//   },
+//   children: [{
+//     type: 'text',
+//     text: 'Hello&nbsp;World!',
+//   }]
+// },
+// {
+//   name: 'blockquote',
+//   attrs: {
+//     class: 'url',
+//     style: 'color: pink;background: #efefef; padding: 15px 5px; border-left:3px solid #CCC;'
+//   },
+//   children: [{
+//     type: 'text',
+//     text: 'baidu.com<a href="">baidu.com</a>',
+//   }]
+// }
+//   ,
+// {
+//   name: 'br',
+//   attrs: {
+//     class: 'url',
+//     style: ''
+//   }
+// }
+
+//   ,
+// {
+//   name: 'code',
+//   attrs: {
+//     class: 'url',
+//     style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
+//   },
+//   children: [{
+//     type: 'text',
+//     text: `CODE:ss `
+//   }, {
+//     type: 'br',
+//     text: ''
+//   }, {
+//     type: 'text',
+//     text: ` 
+//            line-height: 60px; 
+//            color: pink;
+//            background: #efefef; 
+//            padding: 5px 5px; 
+//            border-left:3px solid #CCC`
+//   }]
+// }
+
+//   ,
+// {
+//   name: 'br',
+//   attrs: {
+//     class: 'url',
+//     style: ''
+//   }
+// }
+//   ,
+// {
+//   name: 'br',
+//   attrs: {
+//     class: 'url',
+//     style: ''
+//   }
+// }
+
+//   ,
+// {
+//   name: 'hr',
+//   attrs: {
+//     class: 'url',
+//     style: ''
+//   }
+// }
+
+//   ,
+// {
+//   name: 'br',
+//   attrs: {
+//     class: 'url',
+//     style: ''
+//   }
+// }
+//   ,
+// {
+//   name: 'br',
+//   attrs: {
+//     class: 'url',
+//     style: ''
+//   }
+// }
+
+//   ,
+// {
+//   name: 'i',
+//   attrs: {
+//     class: 'url',
+//     style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
+//   },
+//   children: [{
+//     type: 'text',
+//     text: `i:这是斜体线`,
+//   }]
+// },
+
+// {
+//   name: 'strong',
+//   attrs: {
+//     class: 'url',
+//     style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
+//   },
+//   children: [{
+//     type: 'text',
+//     text: `strong:这是斜体线`,
+//   }]
+// },
+
+// {
+//   name: 'del',
+//   attrs: {
+//     class: 'url',
+//     style: 'color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
+//   },
+//   children: [{
+//     type: 'text',
+//     text: `del:这是删除线`,
+//   }]
+// }
+
+
+// ],
+
+//   nodes2: [{
+//     name: 'img',
+//     attrs: {
+//       src: "http://mat1.gtimg.com/xian/dcls2017/icon-down.png",
+//       class: 'url',
+//       style: 'display:block; margin-top:10px; color: pink;background: #efefef; padding: 5px 5px; border-left:3px solid #CCC;'
+//     },
+//     children: [{
+//       type: 'text',
+//       text: `del:这是删除线`,
+//     }]
+//   }],

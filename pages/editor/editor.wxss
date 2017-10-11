@@ -1,4 +1,72 @@
 /* pages/lab/lab.wxss *//* pages/report/content.wxss */
+
+
+.block {
+  margin: 10px;
+  font-size: 14px;
+  line-height: 120%;
+  overflow: hidden;
+}
+
+.icons {
+  border: 1px solid #F6F6F6;
+  background: #FAFAFA;
+  display:flex; 
+  align-items:center;
+  justify-content: space-between;
+  height: 36px;
+}
+
+.icons view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FAFAFA;
+  font-size: 14px;
+  width:14%;
+  height: 36px; 
+  border-right: 1px solid #EEE;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.h1 {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: .9em;
+}
+
+.h2 {
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: .6em;
+}
+
+.h3 {
+    font-weight: 400;
+    font-size: 15px;
+    margin-bottom: .5em;
+}
+.p {
+  margin: 0 0 .8em;
+}
+
+.focus {
+  border: 1px solid #AAA;
+  box-shadow: 1px 1px 1px #EEE;
+}
+
+.blockquote {
+  background: #FAFAFA;
+  border-left: 2px solid #F0F0F0;
+  padding: 5px;
+  min-height: 18px;
+  margin: 0 0 .8em;
+}
+
+/* 
 .icon{
     width: 36rpx;
     height: 36rpx;
@@ -79,4 +147,4 @@
 }
 .weui-panel__bd{
     padding: 15px 10px;
-}
+} */

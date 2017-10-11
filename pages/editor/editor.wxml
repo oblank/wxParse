@@ -1,21 +1,63 @@
 <!-- <import src="../_partials/topTip.wxml" /> -->
 <!-- <textarea bindblur="bindTextAreaBlur" style='width: 99%; height:400px; border:2px solid red; opacity: 0.1'></textarea> -->
-<rich-text nodes="{{nodes}}" style="border: 1px solid blue;" bindtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text>
+<!-- <rich-text nodes="{{nodes}}" id="node1" data-id="1" style="border: 1px solid blue;" catchtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text> -->
 
-<rich-text nodes="{{nodes2}}" style="border: 1px solid red;" bindtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text>
+<rich-text nodes="{{nodes2}}" id="node2" data-id="2"  style="border: 1px solid red;" bindtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text>
 
-<rich-text nodes="{{nodes3}}" style="border: 1px solid blue;" bindtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text>
+<!-- <rich-text nodes="{{nodes3}}" id="node3" data-id="3" style="border: 1px solid blue;" bindtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text> -->
+
+<view class="block">
+  <block wx:for="{{nodes}}" wx:key="{{o}}">
+  
+    <block wx:if="{{ item.length }}">
+        <!-- <rich-text nodes="{{item}}" richtext="node-{{index}}" data-index="{{index}}"  style="border: 1px solid blue;" bindtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text> -->
+        <view wx:if="{{item[0].name == 'blockquote'}}"> 
+          <textarea id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindblur="textareaBlur" bindinput="textareaInput"></textarea>
+        </view>
+        <view wx:elif="{{item[0].name == 'h1' || item[0].name == 'h2' || item[0].name == 'h3' || item[0].name == 'h4' || item[0].name == 'h5'}}">
+          <input id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindblur="textareaBlur" bindinput="textareaInput"></input>
+        </view>
+        <view wx:elif="{{item[0].name == 'img'}}">
+          TODO 图片上传控件
+        </view>
+        <view wx:else>
+          <textarea id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindblur="textareaBlur" bindinput="textareaInput"></textarea>
+        </view>
+
+        
+    </block>
+    <block wx:else>
+        <view>无法解析！</view>
+    </block>
+    
+  </block>
+</view>
+
+<view class="icons">
+  <view id='H2' catchtap='tapIcon'>标题</view>
+  <view id='H3' catchtap='tapIcon' style='font-size: 13px;'>标题</view>
+  <view id='H4' catchtap='tapIcon' style='font-size: 12px'>标题</view>
+  <view id='P' catchtap='tapIcon' >文本</view>
+  <view id='IMG' catchtap='tapIcon' >图片</view>
+  <view id='BLOCKQUOTE' catchtap='tapIcon' >“引”</view>
+  <!-- <view id='STRONG' catchtap='tapIcon' style='font-weight: 600'>加粗</view> -->
+  <view id='CODE' catchtap='tapIcon'>源码</view>
+</view>
 
 
 
-
-<rich-text nodes="<a href=\"http://baidu.com\">http://baidu.com</a>" bindtap="tap"></rich-text>
-<view class="page">
+<view class="page" style='display:none;'>
     <view>showMsg: showTopTips, msg: topTipMsg</view>
     
     <view class="page__bd sbox">
         <form bindsubmit="formSubmit">
         <!-- <textarea class="editor" auto-focus placeholder="...首行自动存为标题" name="textarea"/> -->
+
+
+
+
+
+
 
         <!-- diy 模块 -->
         <view class="block">
