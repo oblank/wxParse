@@ -20,7 +20,7 @@ Page({
         }
       }]
     ],
-    node_acitve: 0
+    node_active: 0
   },
 
   bindTextAreaBlur: function (e) {
@@ -101,7 +101,7 @@ Page({
     console.log(nodes);
     that.setData({
       nodes: nodes,
-      node_acitve: nodes.length - 1
+      node_active: nodes.length - 1
     })
   },
 
@@ -149,9 +149,9 @@ Page({
   textareaBlur(event) {
     console.log('textareaBlur:', event)
     let that = this;
-    // that.setData({
-    //   node_active: -1
-    // })
+    that.setData({
+      node_active: -1
+    })
   },
 
   // textarea 失去焦点时赋值给rich-text
@@ -175,37 +175,6 @@ Page({
 
 
 
-
-
-
-  onShow: function () {
-    var fadeOutLeft = wx.createAnimation({
-      duration: 200,
-      timingFunction: 'ease',
-    })
-    fadeOutLeft.translate3d("-100%", 0, 0).step();
-    this.fadeOutLeft = fadeOutLeft;
-
-    var fadeOutRight = wx.createAnimation({
-      duration: 200,
-      timingFunction: 'ease',
-    })
-    fadeOutRight.translate3d("100%", 0, 0).step();
-    this.fadeOutRight = fadeOutRight;
-  },
-  showMsg: function (msg) {
-    var self = this;
-    self.setData({
-      'topTipMsg': msg,
-      'showTopTips': true
-    })
-    setTimeout(function () {
-      self.setData({
-        'showTopTips': false,
-        'topTipMsg': ''
-      })
-    }, 2000);
-  },
   handPlus: function (e) {
     // 绑定增加编辑窗    
     let _order = e.target.dataset.order;

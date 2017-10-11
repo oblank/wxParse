@@ -1,34 +1,26 @@
-<!-- <import src="../_partials/topTip.wxml" /> -->
-<!-- <textarea bindblur="bindTextAreaBlur" style='width: 99%; height:400px; border:2px solid red; opacity: 0.1'></textarea> -->
-<!-- <rich-text nodes="{{nodes}}" id="node1" data-id="1" style="border: 1px solid blue;" catchtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text> -->
-
-<rich-text nodes="{{nodes2}}" id="node2" data-id="2"  style="border: 1px solid red;" bindtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text>
-
-<!-- <rich-text nodes="{{nodes3}}" id="node3" data-id="3" style="border: 1px solid blue;" bindtap='tap' bindlongtap='longtap' bindtouchmove='touchmove' bindtouchend='touchend'></rich-text> -->
-
 <view class="block">
   <block wx:for="{{nodes}}" wx:key="{{o}}">
   
     <block wx:if="{{ item.length }}">
       
         <view class='node' wx:if="{{item[0].name == 'h1' || item[0].name == 'h2' || item[0].name == 'h3' || item[0].name == 'h4' || item[0].name == 'h5'}}">
-          <view wx-if="{{node_acitve == index}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
+          <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
           <input id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput"></input>
-          <view wx-if="{{node_acitve == index}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
+          <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
         </view>
 
 
         <view class='node' wx:elif="{{item[0].name == 'img'}}">
-            <view wx-if="{{node_acitve == index}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
+            <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
             <image src="http://mat1.gtimg.com/xian/dcls2017/icon-text.png" />
-            <view wx-if="{{node_acitve == index}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
+            <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
         </view>
 
 
         <view class='node' wx:else>
-          <view wx-if="{{node_acitve == index}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
+          <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
           <textarea id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" maxlength="-1"></textarea>
-          <view wx-if="{{node_acitve == index}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
+          <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
         </view>
 
         
