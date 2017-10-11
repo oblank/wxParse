@@ -5,16 +5,13 @@
   margin: 10px;
   font-size: 14px;
   line-height: 120%;
-  overflow: hidden;
 }
 
 .block view {
-  overflow: hidden;
 }
 
 .block textarea, .block input {
   width: 100%;
-  overflow:hidden;
 }
 
 .block .node {
