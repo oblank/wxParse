@@ -5,12 +5,7 @@ Page({
     nodes: [
       {
         name: 'p',
-        placeholder: '请输入文本内容',
-        value: ''
-      },
-      {
-        name: 'img',
-        placeholder: 'http://mat1.gtimg.com/xian/dcls2017/icon-down.png',
+        placeholder: '请输入内容；点击图标增加模块；长按可删除。',
         value: ''
       }
     ],
@@ -36,11 +31,6 @@ Page({
       }
     })
   },
-
-  // bindTextAreaBlur: function (e) {
-  //   console.log(e.detail.value)
-  //   this._setEditorHeight(this);
-  // },
 
   // 编辑器
   tapIcon(e) {
@@ -87,6 +77,16 @@ Page({
         nodes.push({
           name: tag.toLowerCase(),
           placeholder: "http://mat1.gtimg.com/xian/dcls2017/icon-down.png",
+          value: ''
+        })
+        break;
+      }
+
+      // image
+      case 'VIDEO': {
+        nodes.push({
+          name: tag.toLowerCase(),
+          placeholder: "http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
           value: ''
         })
         break;

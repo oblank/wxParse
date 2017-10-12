@@ -8,10 +8,15 @@
           </view>
 
 
-          <view class='node {{item.isActive}}' wx:elif="{{item.name == 'img'}}">
-              <image src="{{item.placeholder}}" />
+          <view class='node img-node {{item.isActive}}' wx:elif="{{item.name == 'img'}}">
+              <image wx-if="{{item.value}}" src="{{item.value}}" />
+              <image wx-if="{{!item.value}}" src="{{item.placeholder}}" />
           </view>
 
+          <view class='node video-node {{item.isActive}}' wx:elif="{{item.name == 'video'}}">
+              <video wx-if="{{item.value}}" src="{{item.value}}"/>
+              <video wx-if="{{!item.value}}" src="{{item.placeholder}}" />
+          </view>
 
           <view class='node {{item.isActive}}' wx:else>
             <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus  bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" maxlength="-1"></textarea>
@@ -34,5 +39,4 @@
   <view id='BLOCKQUOTE' class="quote" catchtap='tapIcon' ></view>
   <view id='IMG' class="image" catchtap='tapIcon' ></view>
   <view id='VIDEO' class="video" catchtap='tapIcon' ></view>
-  <view id='CODE' class="code" catchtap='tapIcon'></view>
 </view>

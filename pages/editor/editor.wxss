@@ -19,6 +19,11 @@
   overflow: hidden;
 }
 
+.icons .plus-label {
+  color:#ccc;
+  width: 20px;
+}
+
 .icons .quote {
   background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -330px no-repeat;
 }
@@ -41,19 +46,21 @@
 
 .editor {
   margin: 10px;
-  font-size: 14px;
-  /* line-height: 120%; */
+  font-size: 16px;
 }
 
-.editor textarea, .editor input {
+.editor textarea, .editor input, .editor image, .editor video {
   width: 100%;
 }
 
 .editor .node {
-  /* display: flex;
-  align-items: center;
-  flex-direction: column; */
   margin: 10px 0;
+}
+
+.editor .image-node, .node .video-node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .editor .active {
@@ -65,7 +72,7 @@
 }
 
 .h1 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     margin-bottom: .9em;
     width: 100%;
@@ -74,7 +81,7 @@
 
 .h2 {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 16px;
     margin-bottom: .6em;
     width: 100%;
@@ -82,7 +89,7 @@
 
 .h3 {
     font-weight: 700;
-    font-size: 15px;
+    font-size: 17px;
     line-height: 15px;
     margin-bottom: .5em;
     width: 100%;
@@ -111,32 +118,3 @@
   padding:2px;
   border:1px solid #F8F8F8;
 }
-/*  
-.icon{
-    width: 50rpx;
-    height: 50rpx;
-    opacity: 0.2
-}
-.icon-close{
-    background-image: url(http://mat1.gtimg.com/xian/dcls2017/icon-close.png);
-    background-size: 100%;
-}
-.icon-up{
-    background-image: url(http://mat1.gtimg.com/xian/dcls2017/icon-up.png);
-    background-size: 100%;
-}
-.icon-down{
-    background-image: url(http://mat1.gtimg.com/xian/dcls2017/icon-down.png);
-    background-size: 100%;
-}
-.icon-plus{
-    background-image: url(http://mat1.gtimg.com/xian/dcls2017/icon-plus.png);
-    background-size: 100%;
-}
-.block__toolbox{
-    z-index: 100;
-}
-.block__toolbox .icon{
-    display: inline-block;
-    margin-right: 5px;
-} */
