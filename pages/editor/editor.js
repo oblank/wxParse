@@ -94,8 +94,9 @@ Page({
 
       default:
         console.log('no icon logic matched')
-      };
+    };
 
+    nodes = this._toggleNodeActive(nodes, nodes.length - 1);
     console.log('nodes', nodes);
     that.setData({
       nodes: nodes,
@@ -132,31 +133,49 @@ Page({
       if (nodes[index]) {
         nodes[index].value = value;
       }
-      data.nodes = nodes
     }
 
+    data.nodes = this._toggleNodeActive(nodes, nodes.length - 1);
     data.node_acitve = index
-
     console.log('textareaInput', data);
     that.setData(data)
   },
 
   // textarea 失去焦点时赋值给rich-text
   textareaBlur(event) {
-    console.log('textareaBlur:', event)
     let that = this;
+    let nodes = that.data.nodes;
+    nodes = this._toggleNodeActive(nodes, -1);
     that.setData({
+      nodes: nodes,
       node_active: -1
     })
   },
 
   // textarea 失去焦点时赋值给rich-text
   inputFocus(event) {
-    console.log('inputFocus:', event)
     let that = this;
+    let nodes = that.data.nodes;
+    nodes = this._toggleNodeActive(nodes, event.target.dataset.index);
     that.setData({
+      nodes: nodes,
       node_active: event.target.dataset.index
     })
+  },
+
+  _toggleNodeActive: function (nodes, index) {
+    let i = 0;
+    nodes.map((item) => {
+      if (i == index) {
+        item.isActive = 'active';
+      } else {
+        item.isActive = 'not_active';
+      }
+      i++;
+      return item;
+    })
+
+    return nodes;
   },
 
   handBlockUp: function (e) {

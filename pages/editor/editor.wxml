@@ -1,26 +1,20 @@
-<view class="editor" style="min-height: {{editorHeight}}px; border: 1px solid red;">
+<view class="editor" style="min-height: {{editorHeight}}px;">
     <block wx:for="{{nodes}}" wx:key="{{o}}">
     
       <block wx:if="{{ item }}">
         
-          <view class='node' wx:if="{{item.name == 'h1' || item.name == 'h2' || item.name == 'h3' || item.name == 'h4' || item.name == 'h5'}}">
-            <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view> -->
+          <view class='node {{item.isActive}}' wx:if="{{item.name == 'h1' || item.name == 'h2' || item.name == 'h3' || item.name == 'h4' || item.name == 'h5'}}">
             <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus maxlength="140" bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput"></textarea>
-            <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view> -->
           </view>
 
 
-          <view class='node' wx:elif="{{item.name == 'img'}}">
-              <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view> -->
+          <view class='node {{item.isActive}}' wx:elif="{{item.name == 'img'}}">
               <image src="{{item.placeholder}}" />
-              <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view> -->
           </view>
 
 
-          <view class='node' wx:else>
-            <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view> -->
+          <view class='node {{item.isActive}}' wx:else>
             <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus  bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" maxlength="-1"></textarea>
-            <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view> -->
           </view>
 
           
@@ -36,9 +30,9 @@
   <view id='H2' catchtap='tapIcon'>标题</view>
   <view id='H3' catchtap='tapIcon' style='font-size: 13px;'>标题</view>
   <view id='H4' catchtap='tapIcon' style='font-size: 12px'>标题</view>
-  <view id='P' catchtap='tapIcon' >文本</view>
-  <view id='IMG' catchtap='tapIcon' >图片</view>
-  <view id='BLOCKQUOTE' catchtap='tapIcon' >“引用”</view>
-  <!-- <view id='STRONG' catchtap='tapIcon' style='font-weight: 600'>加粗</view> -->
-  <view id='CODE' catchtap='tapIcon'>源码</view>
+  <view id='P' class="text" catchtap='tapIcon' ></view>
+  <view id='BLOCKQUOTE' class="quote" catchtap='tapIcon' ></view>
+  <view id='IMG' class="image" catchtap='tapIcon' ></view>
+  <view id='VIDEO' class="video" catchtap='tapIcon' ></view>
+  <view id='CODE' class="code" catchtap='tapIcon'></view>
 </view>

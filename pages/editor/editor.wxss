@@ -12,29 +12,53 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #FAFAFA;
   font-size: 14px;
-  width:14%;
-  height: 36px; 
-  border-right: 1px solid #EEE;
+  width:12.5%;
+  height: 20px; 
+   border-right: 1px solid #EEE; 
+  overflow: hidden;
+}
+
+.icons .quote {
+  background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -330px no-repeat;
+}
+
+.icons .text {
+  background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -401px no-repeat;
+}
+
+.icons .image {
+  background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -138px no-repeat;
+}
+
+.icons .video {
+  background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -690px no-repeat;
+}
+
+.icons .code {
+  background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -114px no-repeat;
 }
 
 .editor {
   margin: 10px;
   font-size: 14px;
-  line-height: 120%;
+  /* line-height: 120%; */
 }
 
-.block textarea, .block input {
+.editor textarea, .editor input {
   width: 100%;
 }
 
-.block .node {
-  display: flex;
+.editor .node {
+  /* display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column; */
+  margin: 10px 0;
 }
 
+.editor .active {
+  background: #FAFAFA;
+} 
 
 .hidden {
   display: none !important;
@@ -45,11 +69,13 @@
     font-weight: 700;
     margin-bottom: .9em;
     width: 100%;
+    line-height: 18px;
 }
 
 .h2 {
     font-weight: 700;
     font-size: 16px;
+    line-height: 16px;
     margin-bottom: .6em;
     width: 100%;
 }
@@ -57,11 +83,11 @@
 .h3 {
     font-weight: 700;
     font-size: 15px;
+    line-height: 15px;
     margin-bottom: .5em;
     width: 100%;
 }
 .p {
-  margin: 0 0 .8em;
   width: 100%;
 }
 
@@ -76,7 +102,6 @@
   padding: 5px;
   min-height: 18px;
   margin: 0 0 .8em;
-  width: 100%;
 }
 
 .node_active {
