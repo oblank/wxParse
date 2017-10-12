@@ -3,22 +3,16 @@ Page({
 
   data: {
     nodes: [
-      [{
+      {
         name: 'p',
-        attrs: {
-          class: 'p',
-        },
-        children: [{
-          type: 'text',
-          text: '请输入文本内容',
-        }]
-      }],
-      [{
+        placeholder: '请输入文本内容',
+        value: ''
+      },
+      {
         name: 'img',
-        attrs: {
-          src: 'http://mat1.gtimg.com/xian/dcls2017/icon-down.png',
-        }
-      }]
+        placeholder: 'http://mat1.gtimg.com/xian/dcls2017/icon-down.png',
+        value: ''
+      }
     ],
     node_active: 0,
     editorHeight: 300
@@ -28,10 +22,14 @@ Page({
     console.log('onload')
     let that = this
 
+    this._setEditorHeight(that);
+  },
+
+  _setEditorHeight: function (that) {
     // 计算侧边导航高度
     wx.getSystemInfo({
       success: function (res) {
-        let editorHeight = res.windowHeight - 60 // search bar is 44px， tabbar is 50px
+        let editorHeight = res.windowHeight - 70
         that.editorHeight = editorHeight
         that.setData({ editorHeight: editorHeight })
         console.log('editorHeight', editorHeight)
@@ -39,9 +37,10 @@ Page({
     })
   },
 
-  bindTextAreaBlur: function (e) {
-    console.log(e.detail.value)
-  },
+  // bindTextAreaBlur: function (e) {
+  //   console.log(e.detail.value)
+  //   this._setEditorHeight(this);
+  // },
 
   // 编辑器
   tapIcon(e) {
@@ -55,58 +54,41 @@ Page({
       case 'H3':
       case 'H4':
       case 'H5': {
-        nodes.push([{
+        nodes.push({
           name: tag.toLowerCase(),
-          attrs: {
-            class: tag.toLowerCase(),
-          },
-          children: [{
-            type: 'text',
-            text: '请输入标题',
-          }]
-        }])
+          placeholder: '请输入标题',
+          value: ''
+        })
         break;
       }
 
       // pargraph
       case 'P': {
-        nodes.push([{
+        nodes.push({
           name: tag.toLowerCase(),
-          attrs: {
-            class: tag.toLowerCase(),
-          },
-          children: [{
-            type: 'text',
-            text: '请输入文本内容',
-          }]
-        }])
+          placeholder: '请输入文本内容',
+          value: ''
+        })
         break;
       }
 
       // pargraph
       case 'BLOCKQUOTE': {
-        nodes.push([{
+        nodes.push({
           name: tag.toLowerCase(),
-          attrs: {
-            class: tag.toLowerCase(),
-          },
-          children: [{
-            type: 'text',
-            text: '请输入引用内容',
-          }]
-        }])
+          placeholder: '请输入引用内容',
+          value: ''
+        })
         break;
       }
 
       // image
       case 'IMG': {
-        nodes.push([{
+        nodes.push({
           name: tag.toLowerCase(),
-          attrs: {
-            src: "http://mat1.gtimg.com/xian/dcls2017/icon-down.png",
-            class: tag.toLowerCase()
-          }
-        }])
+          placeholder: "http://mat1.gtimg.com/xian/dcls2017/icon-down.png",
+          value: ''
+        })
         break;
       }
 
@@ -114,7 +96,7 @@ Page({
         console.log('no icon logic matched')
       };
 
-    console.log(nodes);
+    console.log('nodes', nodes);
     that.setData({
       nodes: nodes,
       node_active: nodes.length - 1
@@ -148,9 +130,7 @@ Page({
     let data = {};
     if (value) {
       if (nodes[index]) {
-        if (nodes[index][0].children[0].type == 'text') {
-          nodes[index][0].children[0].text = value;
-        }
+        nodes[index].value = value;
       }
       data.nodes = nodes
     }
@@ -188,6 +168,14 @@ Page({
     let tmp = nodes[index];
     nodes[index] = nodes[index - 1];
     nodes[index - 1] = tmp;
+    let i = 0
+    nodes.map((item) => {
+      if (i == index - 1) {
+        item.isFocus = "true";
+      } else {
+        item.isFocus = "false";
+      }
+    })
     this.setData({
       nodes: nodes,
       node_active: index - 1
@@ -204,6 +192,14 @@ Page({
     let tmp = nodes[index];
     nodes[index] = nodes[index + 1];
     nodes[index + 1] = tmp;
+    let i = 0
+    nodes.map((item) => {
+      if (i == index + 1) {
+        item.isFocus = "true";
+      } else {
+        item.isFocus = "false";
+      }
+    })
     console.log('nodes2,', nodes)
 
     this.setData({

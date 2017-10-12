@@ -1,27 +1,26 @@
-<view class="block">
-  <scroll-view scroll-y style="height: {{editorHeight}}px;">
+<view class="editor" style="min-height: {{editorHeight}}px; border: 1px solid red;">
     <block wx:for="{{nodes}}" wx:key="{{o}}">
     
-      <block wx:if="{{ item.length }}">
+      <block wx:if="{{ item }}">
         
-          <view class='node' wx:if="{{item[0].name == 'h1' || item[0].name == 'h2' || item[0].name == 'h3' || item[0].name == 'h4' || item[0].name == 'h5'}}">
-            <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
-            <textarea id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput"></textarea>
-            <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
+          <view class='node' wx:if="{{item.name == 'h1' || item.name == 'h2' || item.name == 'h3' || item.name == 'h4' || item.name == 'h5'}}">
+            <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view> -->
+            <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus maxlength="140" bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput"></textarea>
+            <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view> -->
           </view>
 
 
-          <view class='node' wx:elif="{{item[0].name == 'img'}}">
-              <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
-              <image src="http://mat1.gtimg.com/xian/dcls2017/icon-text.png" />
-              <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
+          <view class='node' wx:elif="{{item.name == 'img'}}">
+              <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view> -->
+              <image src="{{item.placeholder}}" />
+              <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view> -->
           </view>
 
 
           <view class='node' wx:else>
-            <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view>
-            <textarea id="textarea-{{index}}" class="{{item[0].attrs.class}}" data-index="{{index}}" placeholder='{{item[0].children[0].text}}' auto-focus auto-height bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" maxlength="-1"></textarea>
-            <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view>
+            <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != 0}}" bindtap="handBlockUp" data-index="{{index}}" class="icon icon-up"></view> -->
+            <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus  bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" maxlength="-1"></textarea>
+            <!-- <view wx-if="{{node_active == index && nodes.length != 1 && index != nodes.length - 1}}" bindtap="handBlockDown" data-index="{{index}}" class="icon icon-down"></view> -->
           </view>
 
           
@@ -31,7 +30,6 @@
       </block>
       
     </block>
-  </scroll-view>
 </view>
 
 <view class="icons">
