@@ -10,7 +10,16 @@ Page({
       }
     ],
     node_active: 0,
-    editorHeight: 300
+    editorHeight: 300,
+    x: 0,
+    y: 0
+  },
+
+  tap: function (e) {
+    this.setData({
+      x: 30,
+      y: 30
+    });
   },
 
   onLoad() {
@@ -104,9 +113,9 @@ Page({
     })
   },
 
-  tap(event) {
-    console.log('taped...', event)
-  },
+  // tap(event) {
+  //   console.log('taped...', event)
+  // },
 
   longtap(event) {
     console.log('longtap...', event)
