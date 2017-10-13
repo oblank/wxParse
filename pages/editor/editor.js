@@ -5,7 +5,7 @@ Page({
     nodes: [
       {
         name: 'p',
-        placeholder: '请输入内容；点击图标增加模块；长按可删除。',
+        placeholder: '请输入内容，可换行；点击图标增加模块，长按删除。',
         value: ''
       }
     ],
@@ -56,7 +56,7 @@ Page({
       case 'P': {
         nodes.push({
           name: tag.toLowerCase(),
-          placeholder: '请输入文本内容',
+          placeholder: '请输入文本内容，支持换行',
           value: ''
         })
         break;
@@ -66,7 +66,7 @@ Page({
       case 'BLOCKQUOTE': {
         nodes.push({
           name: tag.toLowerCase(),
-          placeholder: '请输入引用内容',
+          placeholder: '请输入引用内容，支持换行',
           value: ''
         })
         break;
@@ -110,6 +110,7 @@ Page({
 
   longtap(event) {
     console.log('longtap...', event)
+
   },
 
   touchmove(event) {
@@ -122,6 +123,27 @@ Page({
 
   // textarea 输入
   textareaInput(event) {
+    // console.log('textareaInput:', event)
+    // let that = this;
+    // let value = event.detail.value;
+    // let index = event.target.dataset.index;
+    // let nodes = that.data.nodes
+    // console.log('nodes,', index, nodes)
+    // let data = {};
+    // if (value) {
+    //   if (nodes[index]) {
+    //     nodes[index].value = value;
+    //   }
+    // }
+
+    // data.nodes = this._toggleNodeActive(nodes, nodes.length - 1);
+    // data.node_acitve = index
+    // console.log('textareaInput', data);
+    // that.setData(data)
+  },
+
+  // textarea 失去焦点时赋值给rich-text
+  textareaBlur(event) {
     console.log('textareaBlur:', event)
     let that = this;
     let value = event.detail.value;
@@ -135,21 +157,10 @@ Page({
       }
     }
 
-    data.nodes = this._toggleNodeActive(nodes, nodes.length - 1);
-    data.node_acitve = index
-    console.log('textareaInput', data);
+    data.nodes = this._toggleNodeActive(nodes, -1);
+    data.node_acitve = -1
+    console.log('textareaBlur', data);
     that.setData(data)
-  },
-
-  // textarea 失去焦点时赋值给rich-text
-  textareaBlur(event) {
-    let that = this;
-    let nodes = that.data.nodes;
-    nodes = this._toggleNodeActive(nodes, -1);
-    that.setData({
-      nodes: nodes,
-      node_active: -1
-    })
   },
 
   // textarea 失去焦点时赋值给rich-text
