@@ -1,11 +1,12 @@
 
 .icons {
-  border: 1px solid #F6F6F6;
+  border-bottom: 1px solid #F2F2F2;
   background: #FAFAFA;
   display:flex; 
   align-items:center;
   justify-content: space-between;
   height: 50px;
+  box-shadow: 1px 1px 2px #F6F6F6;
 }
 
 .icons view {
@@ -74,26 +75,31 @@
 .h1 {
     font-size: 20px;
     font-weight: 700;
-    /* margin-bottom: .9em; */
     width: 100%;
-    line-height: 18px;
+    line-height: 20px;
 }
 
 .h2 {
     font-weight: 700;
     font-size: 18px;
-    line-height: 16px;
-    /* margin-bottom: .6em; */
+    line-height: 18px;
     width: 100%;
 }
 
 .h3 {
-    font-weight: 700;
+    font-weight: 800;
     font-size: 17px;
-    line-height: 15px;
-    /* margin-bottom: .5em; */
+    line-height: 17px;
     width: 100%;
 }
+
+.h4 {
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 16px;
+    width: 100%;
+}
+
 .p {
   width: 100%;
 }
@@ -105,7 +111,7 @@
 
 .blockquote {
   background: #FAFAFA;
-  border-left: 2px solid #F0F0F0;
+  border-left: 4px solid #EEE;
   padding: 5px;
   min-height: 18px;
   /* margin: 0 0 .8em; */

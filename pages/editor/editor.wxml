@@ -1,19 +1,12 @@
-<view class="section">
-  <view class="section__title">movable-view区域小于movable-area</view>
-  <movable-area style="height: 200px;width: 200px;background: red;">
-    <movable-view style="height: 50px; width: 50px; background: blue;" x="{{x}}" y="{{y}}" direction="all">
-    </movable-view>
-  </movable-area>
-  <view class="btn-area">
-    <button size="mini" bindtap="tap">click me to move to (30px, 30px)</button>
-  </view>
-  <view class="section__title">movable-view区域大于movable-area</view>
-  <movable-area style="height: 100px;width: 100px;background: red;" direction="all">
-    <movable-view style="height: 200px; width: 200px; background: blue;">
-    </movable-view>
-  </movable-area>
+<view class="icons">
+  <view id='H2' catchtap='tapIcon'>标题</view>
+  <view id='H3' catchtap='tapIcon' style='font-size: 13px;'>标题</view>
+  <view id='H4' catchtap='tapIcon' style='font-size: 12px'>标题</view>
+  <view id='P' class="text" catchtap='tapIcon' ></view>
+  <view id='BLOCKQUOTE' class="quote" catchtap='tapIcon' ></view>
+  <view id='IMG' class="image" catchtap='tapIcon' ></view>
+  <view id='VIDEO' class="video" catchtap='tapIcon' ></view>
 </view>
-
 <view class="editor" style="min-height: {{editorHeight}}px;">
     <block wx:for="{{nodes}}" wx:key="{{o}}">
     
@@ -45,14 +38,4 @@
       </block>
       
     </block>
-</view>
-
-<view class="icons">
-  <view id='H2' catchtap='tapIcon'>标题</view>
-  <view id='H3' catchtap='tapIcon' style='font-size: 13px;'>标题</view>
-  <view id='H4' catchtap='tapIcon' style='font-size: 12px'>标题</view>
-  <view id='P' class="text" catchtap='tapIcon' ></view>
-  <view id='BLOCKQUOTE' class="quote" catchtap='tapIcon' ></view>
-  <view id='IMG' class="image" catchtap='tapIcon' ></view>
-  <view id='VIDEO' class="video" catchtap='tapIcon' ></view>
 </view>

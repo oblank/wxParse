@@ -4,22 +4,18 @@ Page({
   data: {
     nodes: [
       {
+        name: 'h3',
+        placeholder: '请输入小标题',
+        value: ''
+      },
+      {
         name: 'p',
-        placeholder: '请输入内容，可换行；点击图标增加模块，长按删除。',
+        placeholder: '请输入内容，可换行，长按可删除模块。',
         value: ''
       }
     ],
     node_active: 0,
-    editorHeight: 300,
-    x: 0,
-    y: 0
-  },
-
-  tap: function (e) {
-    this.setData({
-      x: 30,
-      y: 30
-    });
+    editorHeight: 300
   },
 
   onLoad() {
@@ -85,7 +81,7 @@ Page({
       case 'IMG': {
         nodes.push({
           name: tag.toLowerCase(),
-          placeholder: "http://mat1.gtimg.com/xian/dcls2017/icon-down.png",
+          placeholder: "/image/uploader.svg",
           value: ''
         })
         break;
@@ -113,9 +109,9 @@ Page({
     })
   },
 
-  // tap(event) {
-  //   console.log('taped...', event)
-  // },
+  tap(event) {
+    console.log('taped...', event)
+  },
 
   longtap(event) {
     console.log('longtap...', event)
