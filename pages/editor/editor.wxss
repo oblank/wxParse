@@ -63,6 +63,23 @@
   align-items: center;
   justify-content: center;
 }
+.editor .img-node {
+  width:100%;
+  height: 150px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #EEE;
+}
+.editor .uploader{
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+  border: 2px solid #FAFAFA;
+  text-align: center;  
+}
 
 .editor .active {
   background: #FAFAFA;

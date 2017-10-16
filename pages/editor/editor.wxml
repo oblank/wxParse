@@ -18,8 +18,8 @@
 
 
           <view class='node img-node {{item.isActive}}' wx:elif="{{item.name == 'img'}}">
-              <image wx-if="{{item.value}}" src="{{item.value}}" />
-              <image wx-if="{{!item.value}}" src="{{item.placeholder}}" />
+              <image class="image" wx-if="{{item.value}}" src="{{item.value}}" />
+              <image class="uploader" wx-if="{{!item.value}}" src="{{item.placeholder}}" />
           </view>
 
           <view class='node video-node {{item.isActive}}' wx:elif="{{item.name == 'video'}}">
