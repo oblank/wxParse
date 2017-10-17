@@ -131,6 +131,13 @@ Page({
     console.log('taped...', event)
   },
 
+  tap4del(e){
+    wx.showModal({
+      title: '确认删除该模块？',
+      content: '请确认是否删除',
+    })
+  },
+
   longpress(event) {
     console.log('longpress...', event)
     wx.showModal({

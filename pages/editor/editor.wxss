@@ -1,12 +1,13 @@
 
 .icons {
+  /* border-top: 1px solid #F2F2F2; */
   border-bottom: 1px solid #F2F2F2;
   background: #FAFAFA;
   display:flex; 
   align-items:center;
   justify-content: space-between;
   height: 50px;
-  box-shadow: 1px 1px 2px #F6F6F6;
+  box-shadow: -1px -1px 2px #CCC;
 }
 
 .icons view {
@@ -50,28 +51,45 @@
   font-size: 16px;
 }
 
-.editor textarea, .editor input, .editor image, .editor video {
-  width: 100%;
+.editor input, .active input {
+  padding: 5px;
 }
+
+ .editor textarea, .editor input, .editor image, .editor video {
+  border: 1rpx solid #FFF;
+  border-radius: 3px;
+} 
+
+.editor .active textarea, .editor .active input {
+  background: #FAFAFA;
+  border: 1rpx solid #EEE;
+  border-radius: 3px;
+} 
 
 .editor .node {
   margin: 0 0 10px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .editor .del{
-  width: 20px;
-  height: 20px;
-  color: #DDD;
+  margin-left: 3px;
+  width: 18px;
+  height: 18px;
+  color: #FAFAFA;
   font-weight: 100;
-  font-size: 26px;
-  line-height: 20px;
-  /* border: 1rpx solid #EFEFEF;  */
+  font-size: 18px;
+  line-height: 18px;
   text-align: center;
   border-radius: 50%;
-  margin-right: 5px;
+  background: #FEFEFE;
+  padding:5px;
+}
+
+.editor .del_active{
+  background: #FAFAFA;
+  color: #DDD;
 }
 
 .editor .hint {
@@ -88,9 +106,10 @@
 
 .editor .img-node {
   width:100%;
-  min-height: 150px;
+  min-height: 200px;
   text-align: center;
   background: #FAFAFA;
+  border-radius: 3px;
 }
 
 .editor .img-node image {
@@ -113,10 +132,6 @@
   text-align: center;  
   border-radius: 50%;
 }
-
-.editor .active {
-  background: #FAFAFA;
-} 
 
 .hidden {
   display: none !important;
