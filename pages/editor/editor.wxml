@@ -1,3 +1,5 @@
+<scroll-view scroll-y style="height: {{editorHeight + 75}}px;" scroll-into-view="{{toView}}">
+
 <view class="editor" style="min-height: {{editorHeight}}px;">
     <block wx:for="{{nodes}}" wx:key="{{o}}">
     
@@ -5,7 +7,7 @@
         
           <!--//h1,h2...-->
           <view class='node {{item.isActive}}' bindlongpress='longpress' wx:if="{{item.name == 'h1' || item.name == 'h2' || item.name == 'h3' || item.name == 'h4' || item.name == 'h5'}}">
-            <input id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-focus maxlength="140" bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" cursor-spacing="10px"></input>
+            <input id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-focus maxlength="140" bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput"></input>
             <view class="del del_{{item.isActive}}" bindtap='tap4del'>x</view>
           </view>
 
@@ -29,7 +31,7 @@
 
           <!--//textarea-->
           <view class='node {{item.isActive}}' bindlongpress='longpress' wx:else>
-            <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus  bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" maxlength="-1" style="width:{{windowWidth - 40}}px" cursor-spacing="10px"></textarea>
+            <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus  bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" maxlength="-1" style="width:{{windowWidth - 40}}px"></textarea>
             <view class="del del_{{item.isActive}}" bindtap='tap4del'>x</view>            
           </view>
 
@@ -42,7 +44,7 @@
     </block>
 </view>
 
-<view class="icons">
+<view class="icons" id="editor-bar">
   <view id='H2' catchtap='tapIcon'>标题</view>
   <view id='H3' catchtap='tapIcon' style='font-size: 13px;'>标题</view>
   <view id='H4' catchtap='tapIcon' style='font-size: 12px'>标题</view>
@@ -51,3 +53,6 @@
   <view id='IMG' class="image" catchtap='tapIcon' ></view>
   <view id='VIDEO' class="video" catchtap='tapIcon' ></view>
 </view>
+
+
+  </scroll-view>

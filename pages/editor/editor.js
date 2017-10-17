@@ -37,7 +37,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         
-        let editorHeight = res.windowHeight - 70
+        let editorHeight = res.windowHeight - 75
         that.editorHeight = editorHeight
         that.setData({ 
           editorHeight: editorHeight,
