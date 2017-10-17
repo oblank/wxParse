@@ -10,7 +10,7 @@ Page({
       },
       {
         name: 'p',
-        placeholder: '请输入内容，可换行，左滑可删除模块。',
+        placeholder: '请输入内容，可换行。',
         value: ''
       },
       {

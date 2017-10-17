@@ -56,6 +56,22 @@
 
 .editor .node {
   margin: 0 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editor .del{
+  width: 20px;
+  height: 20px;
+  color: #DDD;
+  font-weight: 100;
+  font-size: 26px;
+  line-height: 20px;
+  /* border: 1rpx solid #EFEFEF;  */
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
 .editor .hint {
@@ -64,9 +80,9 @@
   color: #DDD;
 }
 
-.editor .image-node, .node .video-node {
+.editor .img-node, .node .video-node {
   display: flex;
-  align-items: center;
+  align-items: center; 
   justify-content: center;
 }
 
@@ -74,15 +90,19 @@
   width:100%;
   min-height: 150px;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   background: #FAFAFA;
 }
 
 .editor .img-node image {
   background-size: cover;
+}
+
+.editor .uploader-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .editor .uploader{
