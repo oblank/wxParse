@@ -10,7 +10,7 @@ Page({
       },
       {
         name: 'p',
-        placeholder: '请输入内容，可换行，长按可删除模块。',
+        placeholder: '请输入内容，可换行，左滑可删除模块。',
         value: ''
       },
       {
@@ -49,70 +49,76 @@ Page({
     })
   },
 
+  // gen node
+  _genNode: function (tag) {
+    switch (tag.toUpperCase()) {
+      // title
+      case 'H2':
+      case 'H3':
+      case 'H4':
+      case 'H5': {
+        return {
+          name: tag.toLowerCase(),
+          placeholder: '请输入标题',
+          value: ''
+        }
+        break;
+      }
+
+      // pargraph
+      case 'P': {
+        return {
+          name: tag.toLowerCase(),
+          placeholder: '请输入文本内容，支持换行',
+          value: ''
+        }
+        break;
+      }
+
+      // pargraph
+      case 'BLOCKQUOTE': {
+        return {
+          name: tag.toLowerCase(),
+          placeholder: '请输入引用内容，支持换行',
+          value: ''
+        }
+        break;
+      }
+
+      // image
+      case 'IMG': {
+        return {
+          name: tag.toLowerCase(),
+          placeholder: "/image/uploader.svg",
+          value: ''
+        }
+        break;
+      }
+
+      // image
+      case 'VIDEO': {
+        return {
+          name: tag.toLowerCase(),
+          placeholder: "http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
+          value: ''
+        }
+        break;
+      }
+
+      default: {
+        console.log('no icon logic matched')
+        return false
+      }   
+    };
+  },
+
   // 编辑器
   tapIcon(e) {
     console.log('taped icon...', e)    
     let that = this;
     let tag = e.target.id || ''
     let nodes = that.data.nodes
-    switch(tag) {
-      // title
-      case 'H2': 
-      case 'H3':
-      case 'H4':
-      case 'H5': {
-        nodes.push({
-          name: tag.toLowerCase(),
-          placeholder: '请输入标题',
-          value: ''
-        })
-        break;
-      }
-
-      // pargraph
-      case 'P': {
-        nodes.push({
-          name: tag.toLowerCase(),
-          placeholder: '请输入文本内容，支持换行',
-          value: ''
-        })
-        break;
-      }
-
-      // pargraph
-      case 'BLOCKQUOTE': {
-        nodes.push({
-          name: tag.toLowerCase(),
-          placeholder: '请输入引用内容，支持换行',
-          value: ''
-        })
-        break;
-      }
-
-      // image
-      case 'IMG': {
-        nodes.push({
-          name: tag.toLowerCase(),
-          placeholder: "/image/uploader.svg",
-          value: ''
-        })
-        break;
-      }
-
-      // image
-      case 'VIDEO': {
-        nodes.push({
-          name: tag.toLowerCase(),
-          placeholder: "http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400",
-          value: ''
-        })
-        break;
-      }
-
-      default:
-        console.log('no icon logic matched')
-    };
-
+    nodes.push(this._genNode(tag))
     nodes = this._toggleNodeActive(nodes, nodes.length - 1);
     console.log('nodes', nodes);
     that.setData({
@@ -125,12 +131,19 @@ Page({
     console.log('taped...', event)
   },
 
-  longtap(event) {
-    console.log('longtap...', event)
-
+  longpress(event) {
+    console.log('longpress...', event)
+    wx.showModal({
+      title: '确认删除该模块？',
+      content: '请确认是否删除',
+    })
   },
 
   touchmove(event) {
+    wx.showModal({
+      title: '确认删除该模块？',
+      content: '请确认是否删除',
+    })
     console.log('touchmove...', event)
   }, 
   
@@ -213,41 +226,58 @@ Page({
     let nodes = this.data.nodes;
     let that = this;
     let index = e.currentTarget.dataset.index;
-    if (!index) {
+    if (index === false) {
       return;
     }
 
     wx.chooseImage({
-      count: 1,
+      count: 5,
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         console.log('tempFilePaths:', res)
-        var tempFilePaths = res.tempFilePaths;
-        nodes[index].value = tempFilePaths;
+        let tempFilePaths = res.tempFilePaths;
+        if (!tempFilePaths.length) {
+          return;
+        }
 
-        wx.getImageInfo({
-          src: res.tempFilePaths[0],
-          success: function (res) {
-            // todo recal width
-            let showWidth = res.width;
-            let showHeight = res.height;
-            if (res.width > that.data.windowWidth) {
-              showWidth = that.data.windowWidth - 20; //20px is padding border
-              showHeight = res.height * (showWidth / res.width);
-            }
-            nodes[index].width = showWidth;
-            nodes[index].height = showHeight;
-
-            console.log('real:', res.width, res.height)
-            console.log('preview:', showWidth, showHeight)
-
-            that.setData({
-              nodes: nodes
-            })
+        // append more nodes
+        if (tempFilePaths.length > 1) {
+          for(let i = 0; i < tempFilePaths.length - 1; i++) {
+            nodes.splice(index + i, 0, that._genNode('IMG'))
           }
-        })
+        }
 
+        let i = 0
+        tempFilePaths.map((item) => {
+          wx.getImageInfo({
+            src: item,
+            success: function (res) {
+              // todo recal width
+              let showWidth = res.width;
+              let showHeight = res.height;
+              if (res.width > that.data.windowWidth) {
+                showWidth = that.data.windowWidth - 20; //20px is padding border
+                showHeight = res.height * (showWidth / res.width);
+              }
+              //preview
+              nodes[index + i].width = showWidth;
+              nodes[index + i].height = showHeight;
+              //real
+              nodes[index + i].real_width = res.width;
+              nodes[index + i].real_height = res.height;
+              nodes[index + i].value = item;
+
+              i++              
+              if (i == tempFilePaths.length) {
+                that.setData({
+                  nodes: nodes
+                })
+              }
+            }
+          })
+
+        })
       }
     })
   },

@@ -12,26 +12,29 @@
     
       <block wx:if="{{ item }}">
         
+          <!--//h1,h2...-->
           <view class='node {{item.isActive}}' wx:if="{{item.name == 'h1' || item.name == 'h2' || item.name == 'h3' || item.name == 'h4' || item.name == 'h5'}}">
-            <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus maxlength="140" bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput"></textarea>
+            <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus maxlength="140" bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" catchtouchmove='longpress'></textarea>
           </view>
 
-
-          <view class='node img-node {{item.isActive}}' data-index="{{index}}" catchtap="uploadImage" wx:elif="{{item.name == 'img' && !item.value}}">
+          <!--//image-->
+          <view class='node img-node {{item.isActive}}' catchtouchmove='longpress' data-index="{{index}}" catchtap="uploadImage" wx:elif="{{item.name == 'img' && !item.value}}">
               <image class="uploader" wx-if="{{!item.value}}" src="{{item.placeholder}}" />
               <text wx-if="{{!item.value}}" class="hint">点击选择图片</text>
           </view>
 
-          <view class='node img-node' wx:elif="{{item.name == 'img' && item.value}}">
+          <view class='node img-node' catchtouchmove='longpress' data-index="{{index}}" wx:elif="{{item.name == 'img' && item.value}}">
               <image class="image" wx-if="{{item.value}}" src="{{item.value}}" mode="aspectFit" style="width:{{item.width}}px; height:{{item.height}}px"/>
           </view>
 
-          <view class='node video-node {{item.isActive}}' wx:elif="{{item.name == 'video'}}">
+          <!--//video-->
+          <view class='node video-node {{item.isActive}}' catchtouchmove='longpress' data-index="{{index}}" wx:elif="{{item.name == 'video'}}">
               <video wx-if="{{item.value}}" src="{{item.value}}"/>
               <video wx-if="{{!item.value}}" src="{{item.placeholder}}" />
           </view>
 
-          <view class='node {{item.isActive}}' wx:else>
+          <!--//textarea-->
+          <view class='node {{item.isActive}}' catchtouchmove='longpress' wx:else>
             <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus  bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" maxlength="-1"></textarea>
           </view>
 
