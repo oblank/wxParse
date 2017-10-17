@@ -17,9 +17,13 @@
           </view>
 
 
-          <view class='node img-node {{item.isActive}}' wx:elif="{{item.name == 'img'}}">
-              <image class="image" wx-if="{{item.value}}" src="{{item.value}}" />
+          <view class='node img-node {{item.isActive}}' data-index="{{index}}" catchtap="uploadImage" wx:elif="{{item.name == 'img' && !item.value}}">
               <image class="uploader" wx-if="{{!item.value}}" src="{{item.placeholder}}" />
+              <text wx-if="{{!item.value}}" class="hint">点击选择图片</text>
+          </view>
+
+          <view class='node img-node' wx:elif="{{item.name == 'img' && item.value}}">
+              <image class="image" wx-if="{{item.value}}" src="{{item.value}}" mode="aspectFit" style="width:{{item.width}}px; height:{{item.height}}px"/>
           </view>
 
           <view class='node video-node {{item.isActive}}' wx:elif="{{item.name == 'video'}}">

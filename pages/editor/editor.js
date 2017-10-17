@@ -12,10 +12,17 @@ Page({
         name: 'p',
         placeholder: '请输入内容，可换行，长按可删除模块。',
         value: ''
+      },
+      {
+        name: 'img',
+        placeholder: '/image/uploader.svg',
+        value: ''
       }
     ],
     node_active: 0,
-    editorHeight: 300
+    editorHeight: 300,
+    windowWidth: 400,
+    windowHeight: 600
   },
 
   onLoad() {
@@ -29,9 +36,14 @@ Page({
     // 计算侧边导航高度
     wx.getSystemInfo({
       success: function (res) {
+        
         let editorHeight = res.windowHeight - 70
         that.editorHeight = editorHeight
-        that.setData({ editorHeight: editorHeight })
+        that.setData({ 
+          editorHeight: editorHeight,
+          windowWidth: res.windowWidth,
+          windowHeight: res.windowHeight
+        })
         console.log('editorHeight', editorHeight)
       }
     })
@@ -194,6 +206,55 @@ Page({
     return nodes;
   },
 
+  // upload image
+  uploadImage: function(e) {
+    console.log('uploadImage:', e)
+
+    let nodes = this.data.nodes;
+    let that = this;
+    let index = e.currentTarget.dataset.index;
+    if (!index) {
+      return;
+    }
+
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        console.log('tempFilePaths:', res)
+        var tempFilePaths = res.tempFilePaths;
+        nodes[index].value = tempFilePaths;
+
+        wx.getImageInfo({
+          src: res.tempFilePaths[0],
+          success: function (res) {
+            // todo recal width
+            let showWidth = res.width;
+            let showHeight = res.height;
+            if (res.width > that.data.windowWidth) {
+              showWidth = that.data.windowWidth - 20; //20px is padding border
+              showHeight = res.height * (showWidth / res.width);
+            }
+            nodes[index].width = showWidth;
+            nodes[index].height = showHeight;
+
+            console.log('real:', res.width, res.height)
+            console.log('preview:', showWidth, showHeight)
+
+            that.setData({
+              nodes: nodes
+            })
+          }
+        })
+
+      }
+    })
+  },
+
+
+
+
   handBlockUp: function (e) {
     let index = e.target.dataset.index;
     let nodes = this.data.nodes;
@@ -277,7 +338,7 @@ Page({
 
 
 
-  _handImageUpload: function (index) {
+  _handImageUpload: function (e) {
     let blocks = this.data.blocks;
     let self = this;
 
