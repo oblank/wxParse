@@ -97,7 +97,7 @@
 
 .editor .del_active{
   background: #FAFAFA;
-  color: #DDD;
+  color: red;
 }
 
 .editor .hint {
