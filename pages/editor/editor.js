@@ -116,14 +116,15 @@ Page({
   tapIcon(e) {
     console.log('taped icon...', e)    
     let that = this;
-    let tag = e.target.id || ''
+    let tag = e.currentTarget.id || ''
     let nodes = that.data.nodes
-    nodes.push(this._genNode(tag))
-    nodes = this._toggleNodeActive(nodes, nodes.length - 1);
+    nodes.push(that._genNode(tag))
+    nodes = that._toggleNodeActive(nodes, nodes.length - 1);
     console.log('nodes', nodes);
     that.setData({
       nodes: nodes,
-      node_active: nodes.length - 1
+      node_active: nodes.length - 1,
+      toView: 'editor-bar'
     })
   },
 
@@ -132,17 +133,35 @@ Page({
   },
 
   tap4del(e){
-    wx.showModal({
-      title: '确认删除该模块？',
-      content: '请确认是否删除',
-    })
+    let that = this;
+    let index = e.currentTarget.dataset.index || e.target.dataset.index
+    that._delBlock(that, index)
   },
 
-  longpress(event) {
-    console.log('longpress...', event)
+  longpress(e) {
+    let that = this;
+    let index = e.currentTarget.dataset.index || e.target.dataset.index
+    that._delBlock(that, index)
+  },
+
+  _delBlock(that, index) {
+    console.log('删除模块：', index);    
     wx.showModal({
       title: '确认删除该模块？',
-      content: '请确认是否删除',
+      content: '删除后不可恢复',
+      confirmText: '删除',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          let nodes = that.data.nodes;
+          nodes.splice(index, 1);
+          that.setData({
+            nodes: nodes
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
     })
   },
 
@@ -204,7 +223,7 @@ Page({
   inputFocus(event) {
     let that = this;
     let nodes = that.data.nodes;
-    nodes = this._toggleNodeActive(nodes, event.target.dataset.index);
+    nodes = that._toggleNodeActive(nodes, event.target.dataset.index);
     that.setData({
       nodes: nodes,
       node_active: event.target.dataset.index
@@ -213,6 +232,7 @@ Page({
 
   _toggleNodeActive: function (nodes, index) {
     let i = 0;
+    console.log('_toggleNodeActive', nodes);
     nodes.map((item) => {
       if (i == index) {
         item.isActive = 'active';

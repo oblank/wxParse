@@ -1,4 +1,4 @@
-<scroll-view scroll-y style="height: {{editorHeight + 75}}px;" scroll-into-view="{{toView}}">
+<!-- <scroll-view scroll-y style="height: {{editorHeight + 75}}px;" scroll-into-view="{{toView}}"> -->
 
 <view class="editor" style="min-height: {{editorHeight}}px;">
     <block wx:for="{{nodes}}" wx:key="{{o}}">
@@ -8,7 +8,7 @@
           <!--//h1,h2...-->
           <view class='node {{item.isActive}}' bindlongpress='longpress' wx:if="{{item.name == 'h1' || item.name == 'h2' || item.name == 'h3' || item.name == 'h4' || item.name == 'h5'}}">
             <input id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-focus maxlength="140" bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput"></input>
-            <view class="del del_{{item.isActive}}" bindtap='tap4del'>x</view>
+            <view class="del del_{{item.isActive}}" data-index="{{index}}" bindtap='tap4del'>x</view>
           </view>
 
           <!--//image-->
@@ -32,7 +32,7 @@
           <!--//textarea-->
           <view class='node {{item.isActive}}' bindlongpress='longpress' wx:else>
             <textarea id="textarea-{{index}}" class="{{item.name}}" data-index="{{index}}" placeholder='{{item.placeholder}}' value='{{item.value}}' auto-height auto-focus  bindfocus="inputFocus" bindblur="textareaBlur" bindinput="textareaInput" maxlength="-1" style="width:{{windowWidth - 40}}px"></textarea>
-            <view class="del del_{{item.isActive}}" bindtap='tap4del'>x</view>            
+            <view class="del del_{{item.isActive}}" data-index="{{index}}" bindtap='tap4del'>x</view>            
           </view>
 
           
@@ -45,14 +45,36 @@
 </view>
 
 <view class="icons" id="editor-bar">
-  <view id='H2' catchtap='tapIcon'>标题</view>
-  <view id='H3' catchtap='tapIcon' style='font-size: 13px;'>标题</view>
-  <view id='H4' catchtap='tapIcon' style='font-size: 12px'>标题</view>
-  <view id='P' class="text" catchtap='tapIcon' ></view>
-  <view id='BLOCKQUOTE' class="quote" catchtap='tapIcon' ></view>
-  <view id='IMG' class="image" catchtap='tapIcon' ></view>
-  <view id='VIDEO' class="video" catchtap='tapIcon' ></view>
+  <view class="box" id='H2' bindtap='tapIcon'>
+    <view class="icon">标题</view>
+  </view>
+  <view class="box" id='H3' bindtap='tapIcon'>
+    <view class="icon" style='font-size: 13px;'>标题</view>
+  </view>
+  <view class="box" id='H4' bindtap='tapIcon' >
+    <view class="icon" style='font-size: 12px'>标题</view>
+  </view>
+  <view class="box text" id='P' bindtap='tapIcon'>
+    <view class="icon">
+      <image src='/image/editor-text.svg' style='width:15px; height:15px;'/>
+    </view>
+  </view>
+  <view class="box quote" id='BLOCKQUOTE' bindtap='tapIcon' >
+    <view class="icon">
+      <image src='/image/editor-quote.svg' style='width:15px; height:10.38px;'/>
+    </view>
+  </view>
+  <view class="box image" id='IMG' bindtap='tapIcon'>
+    <view class="icon">
+      <image src='/image/editor-pic.svg' style='width:20px; height:13px;'/>
+    </view>
+  </view>
+  <view class="box video" id='VIDEO' bindtap='tapIcon'>
+    <view class="icon">
+      <image src='/image/editor-video.svg' style='width:17px; height:11px;'/>
+    </view>
+  </view>
 </view>
 
 
-  </scroll-view>
+  <!-- </scroll-view> -->

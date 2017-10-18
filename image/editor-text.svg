@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="13px" viewBox="0 0 15 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>editor-text</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="editor-icons" transform="translate(0.000000, -1.000000)" stroke="#7C7D7E">
+            <g id="editor-text">
+                <path d="M0.5,1.5 L14.5,1.5" id="Line"></path>
+                <path d="M0.5,9.5 L13.5,9.5" id="Line"></path>
+                <path d="M0.5,13.5 L8.5,13.5" id="Line"></path>
+                <path d="M0.5,5.5 L8.5,5.5" id="Line"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -5,46 +5,54 @@
   background: #FAFAFA;
   display:flex; 
   align-items:center;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 50px;
   box-shadow: -1px -1px 2px #CCC;
 }
 
-.icons view {
+.icons .box {
+  width:14.2%;  
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  width:12.5%;
-  height: 20px; 
-   border-right: 1px solid #EEE; 
+  height: 50px; 
   overflow: hidden;
+}
+
+.icons .box .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  border-right: 1rpx solid #EEE;
+  height: 20px;
 }
 
 .icons .plus-label {
   color:#ccc;
   width: 20px;
 }
-
-.icons .quote {
-  background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -330px no-repeat;
+/* 
+.icons .text {
+  background: url(https://groups35-images.b0.upaiyun.com/2017/10/cbd457da_editor-icons.svg) 0px 5px no-repeat;
 }
 
-.icons .text {
-  background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -401px no-repeat;
+.icons .quote {
+  background: url(https://groups35-images.b0.upaiyun.com/2017/10/cbd457da_editor-icons.svg) 0px -20px no-repeat;
 }
 
 .icons .image {
-  background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -138px no-repeat;
+  background: url(https://groups35-images.b0.upaiyun.com/2017/10/cbd457da_editor-icons.svg) 15px -50px no-repeat;
 }
 
 .icons .video {
-  background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -690px no-repeat;
+  background: url(https://groups35-images.b0.upaiyun.com/2017/10/cbd457da_editor-icons.svg) 15px -85px no-repeat;
 }
 
 .icons .code {
   background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -114px no-repeat;
-}
+} */
 
 .editor {
   margin: 10px;
