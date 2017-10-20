@@ -2,6 +2,11 @@
 Page({
 
   data: {
+    min_content_length: 100,
+    node_active: 0,
+    editorHeight: 300,
+    windowWidth: 400,
+    windowHeight: 600,
     nodes: [
       {
         name: 'h3',
@@ -18,11 +23,7 @@ Page({
         placeholder: '/image/uploader.svg',
         value: ''
       }
-    ],
-    node_active: 0,
-    editorHeight: 300,
-    windowWidth: 400,
-    windowHeight: 600
+    ]
   },
 
   onLoad() {
@@ -37,7 +38,7 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         
-        let editorHeight = res.windowHeight - 75
+        let editorHeight = res.windowHeight - 75 - 70
         that.editorHeight = editorHeight
         that.setData({ 
           editorHeight: editorHeight,
@@ -86,6 +87,7 @@ Page({
       }
 
       // image
+      case 'IMAGE':
       case 'IMG': {
         return {
           name: tag.toLowerCase(),
@@ -361,89 +363,73 @@ Page({
     })
   },
 
+  genContent: function(e) {
+    let that = this
+    let nodes = that.data.nodes
+    let html = ''
+    let wx_nodes = []
 
+    nodes.forEach((item) => {
+      if (item && item.name && item.value) {
+        let tag = item.name.toUpperCase() || ''    
+        let tag_m = tag.toLowerCase()    
+        switch (tag) {
+          // title
+          case 'H2':
+          case 'H3':
+          case 'H4':
+          case 'H5': {
+            html += `<${tag_m} class="${tag_m}">${item.value}</${tag_m}>`
+            break;
+          }
 
+          // pargraph
+          case 'P': {
+            html += `<${tag_m} class="${tag_m} pargraph">${item.value}</${tag_m}>`
+            break;
+          }
 
+          // pargraph
+          case 'BLOCKQUOTE': {
+            html += `<p class="${tag_m}">${item.value}</p>`
+            break;
+          }
 
-  handBlockClose: function (e) {
-    let index = e.target.dataset.index;
-    let _blocks = this.data.blocks;
-    let self = this;
-    if (index == 0 && _blocks.length == 1) return;
+          // image
+          case 'IMAGE':
+          case 'IMG': {
+            // TODO upload
+            html += `<br/><img class="${tag_m}" src="${item.value}" />`
+            break;
+          }
 
-    wx.showModal({
-      title: '确定要删除此段落吗？',
-      success: function (res) {
-        if (res.confirm) {
-          _blocks.splice(index, 1);
+          // image
+          case 'VIDEO': {
+            html += `<br/><video class="${tag_m}" src="${item.value}" />`
+            break;
+          }
 
-          // 更新排序
-          _blocks.map(function (n, i) {
-            n.index = i
-          })
-          self.setData({
-            'blocks': _blocks
-          })
+          default: {
+            console.log('no node logic matched')
+            return false
+          }  
         }
       }
-    });
-  },
-  
-
-
-
-
-
-
-  _handImageUpload: function (e) {
-    let blocks = this.data.blocks;
-    let self = this;
-
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        var tempFilePaths = res.tempFilePaths;
-
-        blocks[index].value = tempFilePaths;
-        self.setData({
-          'blocks': blocks
-        })
-      }
     })
-  },
-  // handTagTap: function(e){
-  //   let _tags = this.data.tags;
-  //   let _index = e.target.dataset.index;
 
-  //   _tags[_index].actived = _tags[_index].actived?false:true;
-  //   this.setData({
-  //     'tags': _tags
-  //   })
-  // },
-  formSubmit: function (e) {
-    let tags = '', areas = this.data.form.area_id, contents = [];
-    let form = this.data.form;
-    let self = this;
-
-    if (this.data.blocks[0].value.length < 1) {
-      this.showMsg('请写些内容吧');
-      return;
+    if (html.length < that.data.min_content_length) {
+      wx.showModal({
+        title: '内容太少！',
+        content: '真实有效的内容才能通过系统审核',
+        showCancel: false,
+        confirmText: '好的'
+      })
     }
 
-    // this.data.tags.map(function(n, i){
-    //   if(n.actived){
-    //     tags += n.id+'|';
-    //   }
-    // })
-    // form.tags = tags.slice(0, tags.length-1);
-    //改造content的传递方式，从原来的构造一个dom结构，变成传递数据
-    this.data.blocks.map(function (n, i) {
-      contents.push({ 'type': n.type, 'src': n.value })
+    console.log('genContent:', {
+      html,
+      wx_nodes
     })
-    form.content = JSON.stringify(contents);
-
-    console.log(form);
-  },
+  }
 })
 

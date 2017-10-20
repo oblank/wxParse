@@ -33,7 +33,12 @@ Page({
     /**
      * html解析示例
      */
-    var article = `< !DOCTYPE HTML ><!--注释: wxParse试验文本-->
+    var article = `<h3 class="h3">tewtw</h3><p class="p pargraph">32323r
+r23r
+23r
+3r23
+r23r</p><br/><img class="img" src="wxfile://tmp_599605163o6zAJs54W2pZASvEpyu6ei7fQkZwc16ace27eff5a7b0374c6c7549440f7e.jpeg" /><br/><img class="img" src="wxfile://tmp_599605163o6zAJs54W2pZASvEpyu6ei7fQkZw2e982fa6cee81d93b3022f3f29e9f88a.png" /><p class="blockquote">kkhguuu
+koijiuhu</p>< !DOCTYPE HTML ><!--注释: wxParse试验文本-->
       <div style="text-align:center;margin-top:10px;">
 		<img src="https://weappdev.com/uploads/default/original/1X/84512e0f4591bcf0dee42c3293f826e0c24b560c.jpg" alt="wxParse-微信小程序富文本解析组件Logo">
 		<h1 style="color:red;">wxParse-微信小程序富文本解析组件</h1>

@@ -33,26 +33,6 @@
   color:#ccc;
   width: 20px;
 }
-/* 
-.icons .text {
-  background: url(https://groups35-images.b0.upaiyun.com/2017/10/cbd457da_editor-icons.svg) 0px 5px no-repeat;
-}
-
-.icons .quote {
-  background: url(https://groups35-images.b0.upaiyun.com/2017/10/cbd457da_editor-icons.svg) 0px -20px no-repeat;
-}
-
-.icons .image {
-  background: url(https://groups35-images.b0.upaiyun.com/2017/10/cbd457da_editor-icons.svg) 15px -50px no-repeat;
-}
-
-.icons .video {
-  background: url(https://groups35-images.b0.upaiyun.com/2017/10/cbd457da_editor-icons.svg) 15px -85px no-repeat;
-}
-
-.icons .code {
-  background: url(https://developers.weixin.qq.com/wxopenforumres/zh_CN/htmledition/comm_htmledition/style/widget/ueditor_new/themes/default/ueditor_z3793d0.png) 15px -114px no-repeat;
-} */
 
 .editor {
   margin: 10px;
@@ -188,4 +168,8 @@
   padding: 5px;
   min-height: 18px;
   /* margin: 0 0 .8em; */
+}
+
+.submit {
+  margin-top: 10px;
 }
